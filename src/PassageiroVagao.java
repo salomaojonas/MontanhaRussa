@@ -33,10 +33,10 @@ public class PassageiroVagao extends Thread{
 	static PassageiroVagao window = null;
 	static Queue<Integer> waitingqueue = new LinkedList<Integer>();
 	/**
-	 * Lan�ar a aplica��o.
+	 * Lança a aplicação
 	 */
 	public static void main(String[] args) {
-		System.out.println("Ol�!!!");
+		System.out.println("Olá!!!");
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -50,7 +50,7 @@ public class PassageiroVagao extends Thread{
 	}
 
 	/**
-	 * Create the application.
+	 * Inicializador...
 	 */
 	public PassageiroVagao() {
 		initialize();
@@ -58,9 +58,9 @@ public class PassageiroVagao extends Thread{
 
 	/*
 	 * espere
-	 * uma vez que o vag�o estiver com capacidade m�xima ent�o ele pode partir
-	 * caso contr�rio o vag�o deve esperar por mais pessoas.
-	 */
+	 * Uma vez que o vagão está com capacidade máxima então ele pode partir
+	 * caso contrário o vagão deve esperar por mais pessoas.
+	 */	
 	public static boolean P()
 	{
 		if(seatsInWagon <= waitingqueue.size())
@@ -74,7 +74,7 @@ public class PassageiroVagao extends Thread{
 	}
 	
 	/*
-	 * Vag�o est� de novo dispon�vel para a pr�xima viagem.
+	 * Vagão disponível para próxima viagem
 	 */
 	public static boolean V()
 	{
@@ -82,7 +82,7 @@ public class PassageiroVagao extends Thread{
 	}
 	
 	/**
-	 * Inicialize os conte�dos do frame.
+	 * Inicialize os conteúdos do frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
@@ -90,25 +90,25 @@ public class PassageiroVagao extends Thread{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnCreateWagon = new JButton("Criar Vag�o");
+		JButton btnCreateWagon = new JButton("Criar Vagão");
 		btnCreateWagon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(trip == true)
 				{
-					JOptionPane.showMessageDialog(null, "You can't replace the wagon because wagon is in trip");
+					JOptionPane.showMessageDialog(null, "O vagão está em viagem. Você não pode substituí-lo");
 				}
 				else
 				{
 					if(numberOfSeat.getText().equals("") || travellingTime.getText().equals(""))
 					{
-						JOptionPane.showMessageDialog(null, "Enter Number of seats and traveeling time properly");
+						JOptionPane.showMessageDialog(null, "Insira o número de assentos e o tempo de percurso corretamente");
 					}
 					else
 					{
 						wagonAvailable = true;
 						seatsInWagon = Integer.parseInt(numberOfSeat.getText());
 						travelTime = Integer.parseInt(travellingTime.getText());
-						System.out.println("Vag�o foi criado");
+						System.out.println("Vagão foi criado");
 					}
 				}
 				
@@ -117,7 +117,7 @@ public class PassageiroVagao extends Thread{
 		btnCreateWagon.setBounds(26, 120, 127, 32);
 		frame.getContentPane().add(btnCreateWagon);
 		
-		JLabel lblNuberOfSeat = new JLabel("N� de Assentos");
+		JLabel lblNuberOfSeat = new JLabel("Nº de Assentos");
 		lblNuberOfSeat.setBounds(26, 32, 86, 14);
 		frame.getContentPane().add(lblNuberOfSeat);
 		
@@ -135,21 +135,21 @@ public class PassageiroVagao extends Thread{
 		frame.getContentPane().add(travellingTime);
 		travellingTime.setColumns(10);
 		
-		JButton btnDeleteWagon = new JButton("Deletar Vag�o");
+		JButton btnDeleteWagon = new JButton("Deletar Vagão");
 		btnDeleteWagon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(trip==true || wagonAvailable==false)
 				{
 					if(trip==true)
 					{
-						JOptionPane.showMessageDialog(null, "Vag�o Viajando, N�O � poss�vel Deletar!");
+						JOptionPane.showMessageDialog(null, "Vagão Viajando, não é possível deletar!");
 					}
 					else
-						JOptionPane.showMessageDialog(null, "N�O H� Vag�o para Deletar!");
+						JOptionPane.showMessageDialog(null, "Não há vagão para Deletar!");
 				}
 				else if(wagonAvailable==true)
 				{
-					System.out.println("Vag�o foi deletado!");
+					System.out.println("Vagão foi deletado!");
 					wagonAvailable = false;
 				}
 			}
@@ -170,7 +170,7 @@ public class PassageiroVagao extends Thread{
 				  			//wagon is in travel mode
 				  			alreadyTravelled = waitingqueue.peek()-1;
 				  			inTravelling = alreadyTravelled + seatsInWagon;
-				  			System.out.println("Vag�o est� pronto para a viagem!");
+				  			System.out.println("Vagão está pronto para a viagem!");
 				  			ArrayList<Integer> passengerInWagon = new ArrayList<Integer>();
 				  			for(int i=0; i<seatsInWagon; i++)
 				  			{
@@ -206,14 +206,14 @@ public class PassageiroVagao extends Thread{
 				  			System.out.println("Viagem Encerrada!");
 				  			for(int i=0; i<seatsInWagon; i++)
 				  			{
-				  				System.out.println("Passageiro com ID: "+passengerInWagon.get(i)+" est� desembarcando, tempo de chegada: "+ new Date());
+				  				System.out.println("Passageiro com ID: "+passengerInWagon.get(i)+" está desembarcando, tempo de chegada: "+ new Date());
 				  			}
 				  			trip = V();
 				  		}  
 				  		Iterator<Integer> waitingQueueIterator = waitingqueue.iterator();
 				          while (waitingQueueIterator.hasNext()) {
 				          	int p = waitingQueueIterator.next();
-				              System.out.println("Passageiro com ID: "+p+" est� Dormindo.");
+				              System.out.println("Passageiro com ID: "+p+" está Dormindo.");
 				          }
 				      }
 				      
@@ -236,11 +236,11 @@ public class PassageiroVagao extends Thread{
 					int enteredId = Integer.parseInt(passengerId.getText());
 					if(enteredId<=alreadyTravelled)
 					{
-						JOptionPane.showMessageDialog(null, "Passageiro j� viajou");
+						JOptionPane.showMessageDialog(null, "Passageiro já viajou");
 					}
 					else if(enteredId<=inTravelling)
 					{
-						JOptionPane.showMessageDialog(null, "Passageiro est� viajando");
+						JOptionPane.showMessageDialog(null, "Passageiro está viajando");
 					}
 					else if(enteredId<=id)
 					{
@@ -249,7 +249,7 @@ public class PassageiroVagao extends Thread{
 					}
 					else
 					{
-						JOptionPane.showMessageDialog(null, "N�O H� Passageiro com este id "+enteredId+" no Sistema");
+						JOptionPane.showMessageDialog(null, "Não há Passageiro com este id "+enteredId+" no Sistema");
 					}
 				}
 			}
